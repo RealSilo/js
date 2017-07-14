@@ -1,27 +1,19 @@
 function LinkedList () {
-  var length = 0;
-  var head = null;
+  this.length = 0;
+  this.head = null;
 
   var Node = function(element) {
     this.element = element;
     this.next = null;
   };
 
-  this.size = function() {
-    return length;
-  };
-
-  this.head = function() {
-    return head;
-  }
-
   this.add = function(element) {
     var node = new Node(element);
 
-    if (head === null) {
-      head = node;
+    if (this.head === null) {
+      this.head = node;
     } else {
-      var currentNode = head;
+      var currentNode = this.head;
 
       while (currentNode.next) {
         currentNode = currentNode.next;
@@ -30,16 +22,16 @@ function LinkedList () {
       currentNode.next = node;
     }
 
-    length++;
+    this.length++;
     return node;
   }
 
   this.remove = function(element) {
-    var currentNode = head;
+    var currentNode = this.head;
     var previousNode;
     
     if (currentNode.element === element) {
-      head = currentNode.next
+      this.head = currentNode.next
     } else {
       while (currentNode.element !== element) {
         if (currentNode.next === null) { 
@@ -53,23 +45,23 @@ function LinkedList () {
       previousNode.next = currentNode.next;
     }
 
-    length--;
+    this.length--;
     return currentNode;
   }
 
   this.addAt = function(index, element) {
-    if (index > length) {
+    if (index > this.length) {
       return false;
     }
 
     var node = new Node(element);
-    var currentNode = head;
+    var currentNode = this.head;
     var previousNode;
     var currentIndex = 0;
 
     if (index === 0) {
       node.next = currentNode;
-      head = node;
+      this.head = node;
     } else {
       while(currentIndex < index) {
         previousNode = currentNode;
@@ -81,16 +73,16 @@ function LinkedList () {
       previousNode.next = node;
     }
 
-    length++;
+    this.length++;
     return node;
   }
 
   this.removeAt = function(index) {
-    if (index < 0 || index >= length) {
+    if (index < 0 || index >= this.length) {
       return null;
     }
 
-    var currentNode = head;
+    var currentNode = this.head;
     var previousNode;
     var currentIndex = 0;
 
@@ -106,7 +98,7 @@ function LinkedList () {
       previousNode.next = currentNode.next;
     }
 
-    length--;
+    this.length--;
     return currentNode;
   }
 }
@@ -115,12 +107,12 @@ var list = new LinkedList();
 list.add('Dog');
 list.add('Cat');
 list.add('Horse');
-console.log(list.size());
-console.log(list.head());
+console.log(list.length);
+console.log(list.head);
 list.remove('Cat');
-console.log(list.head());
+console.log(list.head);
 list.addAt(1, 'Mouse');
-console.log(list.head());
+console.log(list.head);
 list.add('Parrot');
 list.removeAt(1);
-console.log(list.head());
+console.log(list.head);
