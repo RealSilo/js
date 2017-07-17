@@ -62,3 +62,10 @@ const lexus = new Lexus({ color: 'blue', title: 'RX 350'} );
 console.log('Lexus ' + lexus.drive());
 console.log(lexus.honk());
 console.log(lexus);
+
+console.log(Vehicle.prototype.drive); // [Function: drive];
+console.log(Lexus.prototype.drive); // [Function: drive];
+console.log(vehicle.__proto__); // Vehicle {}; -> Vehicle.prototype
+console.log(lexus.__proto__); // Lexus {}; -> Lexus.prototype
+console.log(Lexus.__proto__); // [Function: Vehicle];
+
