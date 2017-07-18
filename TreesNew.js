@@ -217,7 +217,117 @@ class BST {
   }
 
   isBalanced() {
+    return (this.minHeight() >= this.maxHeight() - 1)
+  }
 
+  minHeight(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+
+    const left = this.minHeight(node.left);
+    const right = this.minHeight(node.right);
+
+    if (left < right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
+
+  maxHeight(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+
+    const left = this.maxHeight(node.left);
+    const right = this.maxHeight(node.right)
+
+    if (left < right) {
+      return right + 1;
+    } else {
+      return left + 1;
+    }
+  }
+
+  inOrder(node = this.root) {
+    if (node === null) {
+      return null
+    }
+
+    let result = [];
+
+    const traverseInOrder = (node) => {
+      node.left && traverseInOrder(node.left);
+      result.push(node.data);
+      node.right && traverseInOrder(node.right);
+    }
+
+    traverseInOrder(node);
+
+    return result;
+  }
+
+  preOrder(node = this.root) {
+    if (node === null) {
+      return null;
+    }
+
+    let result = [];
+
+    const traversePreOrder = (node) => {
+      result.push(node.data);
+      node.left && traversePreOrder(node.left);
+      node.right && traversePreOrder(node.right);
+    }
+
+    traversePreOrder(node);
+
+    return result;
+  }
+
+  postOrder(node = this.root) {
+    if (node === null) {
+      return null;
+    }
+
+    let result = [];
+
+    const traversePostOrder = (node) => {
+      node.left && traversePostOrder(node.left);
+      node.right && traversePostOrder(node.right);
+      result.push(node.data);
+    }
+
+    traversePostOrder(node);
+
+    return result;
+  }
+
+  levelOrder(startNode, = this.root) {
+    if (startNode === null) {
+      return null;
+    }
+
+    let result = [];
+    let queue = [];
+
+    queue.push(startNode);
+
+    while (queue.length > 0) {
+      let node = queue.shift();
+      result.push(node.data);
+
+      if (node.left !== null) {
+        queue.push(node.left);
+      }
+
+      if (node.right !== null) {
+        queue.push(node.right)
+      }
+    }
+
+    return result;
   }
 }
 
@@ -238,7 +348,12 @@ bst.add(50);
 bst.removeWithNoParent(50);
 
 console.log(bst);
-console.log(bst.find(35).right);
+// console.log(bst.minHeight());
+// console.log(bst.maxHeight());
+console.log(bst.inOrder());
+console.log(bst.preOrder());
+console.log(bst.postOrder());
+// console.log(bst.find(35).right);
 // console.log(bst.findMin(bst.root));
 // console.log(bst.find(20).right);
 // console.log(bst.findMax());
