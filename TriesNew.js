@@ -58,7 +58,7 @@ class Trie {
     }
   }
 
-  print() {
+  print(node = this.root) {
     let words = [];
     const collect = (node, string) => {
       if (node.hash.size !== 0) {
@@ -74,11 +74,15 @@ class Trie {
         return;
       }
     }
-    collect(this.root, new String());
+    collect(node, new String());
     return words.length > 0 ? words : null;
   }
 
   find(word, node = this.root) {
+    if (node.hash.has(word[0]) === null) {
+      return null;
+    }
+
     if (word.length === 0 && node.isEnd()) {
       return node.data;
     } else if (word.length === 0) {
@@ -86,6 +90,36 @@ class Trie {
     }
 
     return this.find(word.substr(1), node.hash.get(word[0]));
+  }
+
+  findAll(word, node = this.root) {
+    let words = [];
+
+    const collect = (node, string, word = '') => {
+      if (node && node.hash.size !== 0) {
+        if (word.length > 0) {
+          collect(node.hash.get(word[0]), string.concat(word[0]), word.substr(1));
+        } else {
+          for (let letter of node.hash.keys()) {
+            collect(node.hash.get(letter), string.concat(letter));
+          }
+        }
+
+        if (node.isEnd()) {
+          words.push({ [string]: node.data });
+        }
+      } else if (node) {
+        if (string.length > 0) {
+          words.push({ [string]: node.data } );
+        }
+        return;
+      } else {
+        return;
+      }
+    }
+    collect(node, new String(), word);
+
+    return words;
   }
 }
 
@@ -96,8 +130,10 @@ trie.add('danny', { 'date' : '1998-04-21' });
 trie.add('jane', { 'date' : '1985-05-08' });
 trie.add('jack', { 'date' : '1994-11-04' });
 trie.add('pete', { 'date' : '1977-12-18' });
-console.log(trie.isWord('jack'));
-console.log(trie.root.hash.keys());
-console.log(trie.root.hash.get('p'));
+// console.log(trie.isWord('jack'));
+// console.log(trie.root.hash.keys());
+// console.log(trie.root.hash.get('p'));
 console.log(trie.print());
 console.log(trie.find('peter'));
+console.log(trie.findAll('pet'));
+console.log(trie.findAll('pw'));
