@@ -67,12 +67,44 @@ function mergeSort(arr) {
 console.log(mergeSort([1,5,11,8,2,9,7]));
 
 function quickSort(arr) {
+  const quickSortHelper = function(arr, first, last) {
+    if (first < last) {
+      let splitPoint = partition(arr, first, last);
+      quickSortHelper(arr, first, splitPoint - 1);
+      quickSortHelper(arr, splitPoint + 1, last);
+    }
+    return arr;
+  }
 
   const partition = function(arr, first, last) {
-    let pivot = arr[first];
-    let left_mark = first + 1;
-    let right_mark = last;
+    let pivotValue = arr[first];
+    let leftMark = first + 1;
+    let rightMark = last;
 
     let done = false;
+
+    while (done === false) {
+      while (leftMark <= rightMark && arr[leftMark] <= pivotValue) {
+        leftMark++;
+      }
+
+      while (leftMark <= rightMark && arr[rightMark] >= pivotValue) {
+        rightMark--;
+      }
+
+      if (leftMark > rightMark) {
+        done = true;
+      } else {
+        [arr[leftMark], arr[rightMark]] = [arr[rightMark], arr[leftMark]];
+      }
+    }
+
+    [arr[first], arr[rightMark]] = [arr[rightMark], arr[first]];
+
+    return rightMark;
   }
+
+  return quickSortHelper(arr, 0, arr.length - 1);
 }
+
+console.log(quickSort([4,2,9,13,3,8,7]));
