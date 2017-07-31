@@ -1,7 +1,3 @@
-require('babel-register')({
-   presets: [ 'es2015' ]
-});
-
 function Car(options) {
   this.title = options.title;
 }

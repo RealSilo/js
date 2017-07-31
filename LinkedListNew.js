@@ -1,7 +1,3 @@
-require('babel-register')({
-   presets: [ 'es2015' ]
-});
-
 class Node {
   constructor(element) {
     this.element = element;

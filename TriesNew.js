@@ -1,7 +1,3 @@
-require('babel-register')({
-   presets: [ 'es2015' ]
-});
-
 class Node {
   constructor() {
     this.hash = new Map();
