@@ -169,4 +169,3 @@ maxHeap.remove();
 console.log(maxHeap.heap);
 maxHeap.remove();
 console.log(maxHeap.heap);
-

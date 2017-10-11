@@ -1,12 +1,17 @@
 function Queue () {
   this.store = [];
+  this.queue = queue;
+  this.dequeue = dequeue;
+  this.size = size;
+  this.front = front;
+  this.isEmpty = isEmpty;
 
-  this.queue = function(element) {
+  function queue(element) {
     this.store.push(element);
     return this;
   }
 
-  this.dequeue = function() {
+  function dequeue() {
     if (this.isEmpty()) {
       return 'The queue is empty.'
     }
@@ -14,15 +19,15 @@ function Queue () {
     return this.store.shift();
   }
 
-  this.size = function() {
+  function size() {
     return this.store.length;
   }
 
-  this.front = function() {
+  function front() {
     return this.store[0]
   }
 
-  this.isEmpty = function() {
+  function isEmpty() {
     return (this.size() === 0);
   }
 }

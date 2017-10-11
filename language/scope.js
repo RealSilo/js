@@ -22,3 +22,5 @@ object.bar(); // John, Oscar
 bar.call(object); // John, Oscar
 bar(); //John, undefined
 
+
+
