@@ -30,11 +30,24 @@ class LinkedList {
     return node;
   }
 
+  find(element) {
+    let currentNode = this.head;
+
+    while (currentNode.element !== element) {
+      if (currentNode.next === null) {
+        return null
+      }
+      currentNode = currentNode.next;
+    }
+
+    return currentNode;
+  }
+
   remove(element) {
     let currentNode = this.head;
     let previousNode;
 
-    if (currentNode.element == element) {
+    if (currentNode.element === element) {
       this.head = currentNode.next;
     } else {
       while (currentNode.element !== element) {
@@ -115,6 +128,7 @@ list.add('Horse');
 console.log(list.length);
 console.log(list.head);
 list.remove('Cat');
+console.log(list.find('Dog'));
 console.log(list.head);
 list.addAt(1, 'Mouse');
 console.log(list.head);
