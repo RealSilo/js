@@ -4,14 +4,14 @@ class HashTable {
     this.storageLimit = storageLimit || 10;
   }
 
-  hash(string, limit) {
+  hash(string) {
     let hashValue = 0;
 
     for(const letter of string) {
       hashValue += letter.charCodeAt(0)
     };
 
-    return hashValue % limit;
+    return hashValue % this.storageLimit;
   }
 
   print() {
@@ -19,7 +19,7 @@ class HashTable {
   }
 
   add(key, value) {
-    const index = this.hash(key, this.storageLimit);
+    const index = this.hash(key);
 
     if (this.storage[index] === undefined) {
       this.storage[index] = [
