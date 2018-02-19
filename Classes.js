@@ -1,3 +1,29 @@
+var Ur = function() {};
+new Ur() //=> Ur {}
+new Ur() === new Ur() //=> false
+Ur.prototype //=> Ur {}
+Ur.prototype.language = 'JavaScript';
+var continent = new Ur();
+continent.language //=> 'JavaScript'
+// That’s very interesting! Instances seem to behave as if they had the same
+// elements as their constructor’s prototype.
+continent.language = 'CoffeeScript';
+continent //=> Ur { language: 'CoffeeScript' }
+continent.language //=> 'CoffeScript'
+// You can set elements of an instance, and they “override” the constructor’s
+// prototype, but they don’t actually change the constructor’s prototype
+var another = new Ur();
+another.language //=> 'JavaScript'
+continent.constructor //=> [Function]
+continent.constructor === Ur //=> true
+// Every instance acquires a constructor element that is initialized to their
+// constructor. This is true even for objects we don’t create with new in our
+// own code:
+// {}.constructor //=> [Function: Object]
+Ur.prototype.constructor //=> [Function]
+Ur.prototype.constructor === Ur //=> true
+Ur.constructor //=> [Function: Function]
+
 function Car(options) {
   this.title = options.title;
 }
