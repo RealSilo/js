@@ -300,7 +300,7 @@ class BST {
     return result;
   }
 
-  levelOrder(startNode, = this.root) {
+  levelOrder(startNode = this.root) {
     if (startNode === null) {
       return null;
     }
